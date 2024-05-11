@@ -1,0 +1,77 @@
+match (p:Party)<-[e1]-(u:User)-[e]-(t:Tweet) 
+where t.favorite_count > 2500
+return *
+
+
+match (p1:Party)<-[e]-(u:User)-[e1]-(t:Tweet)-[e2]-(s:User)
+where u.name = "Emir KIR" and t.favorite_count > 1000
+return *
+
+match (p1:Party)<-[e]-(u:User)-[e1]-(t:Tweet)-[e2]-(s:User)
+where u.name = "Raoul Hedebouw" 
+or u.name ="Nabil Boukili" 
+and t.favorite_count > 1000 
+and t.ranked_classification ="HighQuality"
+return *
+
+
+match (p1:Party)<-[e]-(u:User)-[e1]-(t:Tweet)-[e2]-(s:User)
+where u.name = "Emir KIR"
+RETURN count(t) AS NumberOfTweets
+
+match (p1:Party)<-[e]-(u:User)-[e1]-(t:Tweet)-[e2]-(s:User)
+where u.name = "Emir KIR"
+RETURN t.lang AS Language, count(t) AS NumberOfTweets
+ORDER BY NumberOfTweets DESC
+
+match (p1:Party)<-[e]-(u:User)-[e1]-(t:Tweet)-[e2]-(s:User)
+where u.name = "Emir KIR"
+RETURN s.location AS loc, count(t) AS NumberOfTweets
+ORDER BY NumberOfTweets DESC
+
+
+match (p1:Party)<-[e]-(u:User)-[e1]-(t:Tweet)-[e2]-(s:User)
+where u.name = "Darya Safai MP"
+RETURN count(t) AS NumberOfTweets
+
+match (p1:Party)<-[e]-(u:User)-[e1]-(t:Tweet)-[e2]-(s:User)
+where u.name = "Darya Safai MP"
+RETURN t.lang AS Language, count(t) AS NumberOfTweets
+ORDER BY NumberOfTweets DESC
+
+
+match (p1:Party)<-[e]-(u:User)-[e1]-(t:Tweet)-[e2]-(s:User)
+where u.name = "Darya Safai MP”
+RETURN s.location AS loc, count(t) AS NumberOfTweets
+ORDER BY NumberOfTweets DESC
+
+match (p1:Party)<-[e]-(u:User)<-[e1]-(t:Tweet)
+where u.name = "Darya Safai MP" 
+and t.favorite_count  > 100
+and t.lang = "fr"
+RETURN *
+
+
+match (p1:Party)<-[e]-(u:User)<-[e1]-(t:Tweet)
+where u.name = "Emir KIR" 
+and t.favorite_count  > 300
+and t.lang = "fr"
+RETURN *
+
+MATCH (p1:Party)<-[e3]-(u1:User)-[e1]-(t:Tweet)-[e2]-(u2:User)-[e4]->(p2:Party)
+WHERE p1 <> p2 AND t.favorite_count > 50
+RETURN *
+
+
+MATCH (p1:Party)<-[e3]-(u1:User)<-[e1]-(t:Tweet)-[e2]-(u2:User)-[e4]->(p2:Party)
+WHERE u1.name = "Egbert Lachaert"
+RETURN *
+
+MATCH (p1:Party)<-[e3]-(u1:User)<-[e1]-(t:Tweet)-[e2]-(u2:User)-[e4]->(p2:Party)
+WHERE u1.name = "Melissa Depraetere"
+RETURN *
+
+
+match (p:Party)<-[e1]-(u:User)-[e2]-(t:Tweet)
+where t.favorite_count > 200
+return *
